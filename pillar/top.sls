@@ -1,3 +1,6 @@
 user:
-  dom0 or fedora-42-personal:
+  'fedora-42-personal':
     - templates.fedora-42-personal
+  
+  'dom0':
+    - appvms.personal-env
