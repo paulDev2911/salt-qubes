@@ -9,7 +9,6 @@ create-fedora-42-personal-template:
 
 {% elif grains['id'] == 'fedora-42-personal' %}
 
-
 {% set lw = tpl.get('browsers', {}).get('librewolf', {}) %}
 librewolf-repo--add-repository:
   cmd.run:
