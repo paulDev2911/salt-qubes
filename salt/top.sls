@@ -12,3 +12,5 @@ user:
     - personal
     - vault
     - sys-net
+    - policies
+    - dom0

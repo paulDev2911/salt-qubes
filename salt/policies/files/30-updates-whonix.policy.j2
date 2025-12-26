@@ -1,0 +1,13 @@
+## Policy file: Updates via Whonix
+## Managed by Salt - DO NOT EDIT MANUALLY
+
+{% for template in excluded_templates %}
+# Excluded: {{ template }} uses sys-firewall
+qubes.UpdatesProxy * {{ template }} @default allow target=sys-firewall
+{% endfor %}
+
+# All other TemplateVMs use {{ gateway }}
+qubes.UpdatesProxy * @type:TemplateVM @default allow target={{ gateway }}
+
+# Deny all other UpdatesProxy requests
+qubes.UpdatesProxy * @anyvm @anyvm deny

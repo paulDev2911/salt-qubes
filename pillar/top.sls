@@ -3,6 +3,8 @@ user:
     - personal
     - vault
     - sys-net
+    - policies
+    - dom0-settings
   
   'fedora-42-personal':
     - personal
