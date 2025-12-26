@@ -1,0 +1,9 @@
+#!/bin/bash
+# Qubes Firewall User Script - Managed by Salt
+# Kill-Switch: Block all non-VPN traffic
+
+# IPv4: Drop all forwarding to eth0 (only allow wg0)
+nft add rule qubes custom-forward oifname eth0 counter drop
+
+# IPv6: Drop all forwarding to eth0
+nft add rule ip6 qubes custom-forward oifname eth0 counter drop

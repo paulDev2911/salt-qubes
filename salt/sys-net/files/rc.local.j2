@@ -1,0 +1,8 @@
+#!/bin/bash
+# Qubes rc.local - Managed by Salt
+# This file runs at VM startup
+
+# START WIREGUARD CONFIG - managed by salt
+cp /home/user/{{ wg_config_name }} /etc/wireguard/
+wg-quick up /etc/wireguard/{{ wg_config_name }}
+# END WIREGUARD CONFIG - managed by salt

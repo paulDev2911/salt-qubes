@@ -5,6 +5,10 @@ user:
   'debian-13-vault':
     - vault.template
   
+  'fedora-42-net':
+    - sys-net.template
+  
   'dom0':
     - personal
     - vault
+    - sys-net
