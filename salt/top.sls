@@ -1,10 +1,10 @@
 user:
   'fedora-42-personal':
-    - templates.fedora-42-personal
-    
+    - personal.template
+  
   'debian-13-vault':
-    - templates.debian-13-vault
-    
+    - vault.template
+  
   'dom0':
-    - appvms.personal-env
-    - appvms.vault
+    - personal
+    - vault
