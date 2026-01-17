@@ -5,15 +5,11 @@ personal:
     proxy: http://127.0.0.1:8082
     
     packages:
-#      librewolf:
-#        repo_url: https://repo.librewolf.net/librewolf.repo
-#        repo_file: /etc/yum.repos.d/librewolf.repo
-#        package: librewolf
-      
       brave:
         repo_url: https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
         repo_file: /etc/yum.repos.d/brave-browser.repo
         package: brave-browser      
+      
       mullvad:
         repo_url: https://repository.mullvad.net/rpm/stable/mullvad.repo
         repo_file: /etc/yum.repos.d/mullvad.repo
@@ -30,6 +26,12 @@ personal:
           gpgcheck: 1
           repo_gpgcheck: 1
           metadata_expire: 1h
+      
+      sops:
+        download_url: https://github.com/getsops/sops/releases/download/v3.9.2/sops-3.9.2-1.x86_64.rpm
+      
+      age:
+        download_url: https://github.com/FiloSottile/age/releases/download/v1.2.0/age-v1.2.0-linux-amd64.tar.gz
   
   vms:
     dev:

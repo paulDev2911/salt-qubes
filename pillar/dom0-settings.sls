@@ -3,7 +3,7 @@ dom0:
     clockvm: sys-mullvad
     updatevm: sys-whonix
     default_netvm: sys-mullvad
-    default_dispvm: fedora-42-dvm
+    default_dispvm: default-dvm
   
   updates:
     check_updates: true

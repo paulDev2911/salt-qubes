@@ -71,4 +71,63 @@ vscodium--install:
     - require:
       - file: vscodium--add-repo
 {% endif %}
+{% if 'sops' in packages %}
+{% set sp = packages.sops %}
+sops--download:
+  cmd.run:
+    - name: curl -L -o /tmp/sops.rpm {{ sp.download_url }}
+    - env:
+      - https_proxy: {{ proxy }}
+    - creates: /usr/local/bin/sops
+    - unless: test -f /usr/local/bin/sops
+
+sops--install:
+  cmd.run:
+    - name: rpm -i /tmp/sops.rpm
+    - unless: rpm -q sops
+    - require:
+      - cmd: sops--download
+
+sops--cleanup:
+  file.absent:
+    - name: /tmp/sops.rpm
+    - require:
+      - cmd: sops--install
+{% endif %}
+{% if 'age' in packages %}
+{% set ag = packages.age %}
+age--download:
+  cmd.run:
+    - name: curl -L -o /tmp/age.tar.gz {{ ag.download_url }}
+    - env:
+      - https_proxy: {{ proxy }}
+    - creates: /usr/local/bin/age
+    - unless: test -f /usr/local/bin/age
+
+age--extract:
+  archive.extracted:
+    - name: /tmp/age-extract
+    - source: /tmp/age.tar.gz
+    - archive_format: tar
+    - unless: test -f /usr/local/bin/age
+    - require:
+      - cmd: age--download
+
+age--install:
+  cmd.run:
+    - name: |
+        install -m 755 /tmp/age-extract/age/age /usr/local/bin/age
+        install -m 755 /tmp/age-extract/age/age-keygen /usr/local/bin/age-keygen
+    - unless: test -f /usr/local/bin/age
+    - require:
+      - archive: age--extract
+
+age--cleanup:
+  file.absent:
+    - names:
+      - /tmp/age.tar.gz
+      - /tmp/age-extract
+    - require:
+      - cmd: age--install
+{% endif %}
 {% endif %}
