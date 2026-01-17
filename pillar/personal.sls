@@ -5,11 +5,15 @@ personal:
     proxy: http://127.0.0.1:8082
     
     packages:
-      librewolf:
-        repo_url: https://repo.librewolf.net/librewolf.repo
-        repo_file: /etc/yum.repos.d/librewolf.repo
-        package: librewolf
+#      librewolf:
+#        repo_url: https://repo.librewolf.net/librewolf.repo
+#        repo_file: /etc/yum.repos.d/librewolf.repo
+#        package: librewolf
       
+      brave:
+        repo_url: https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+        repo_file: /etc/yum.repos.d/brave-browser.repo
+        package: brave-browser      
       mullvad:
         repo_url: https://repository.mullvad.net/rpm/stable/mullvad.repo
         repo_file: /etc/yum.repos.d/mullvad.repo

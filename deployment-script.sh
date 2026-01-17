@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_VM="test-appvm"
+APP_VM="personal-dev"
 REPO_DIR="salt/salt-qubes"
 SALT_DIR="$REPO_DIR/salt"
 FORMULAS_DIR="$REPO_DIR/formulas"
