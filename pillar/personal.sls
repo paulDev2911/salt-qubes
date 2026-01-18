@@ -32,6 +32,14 @@ personal:
       
       age:
         download_url: https://github.com/FiloSottile/age/releases/download/v1.2.0/age-v1.2.0-linux-amd64.tar.gz
+
+      packer:
+        download_url: https://releases.hashicorp.com/packer/1.11.2/packer_1.11.2_linux_amd64.zip
+      
+      terraform:
+        repo_url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+        repo_file: /etc/yum.repos.d/hashicorp.repo
+        package: terraform
   
   vms:
     dev:
@@ -41,7 +49,7 @@ personal:
       memory: 4096
       maxmem: 8192
       vcpus: 2
-      menu_items: librewolf.desktop mullvad-browser.desktop codium.desktop org.gnome.Nautilus.desktop
+      menu_items: brave-browser.desktop mullvad-browser.desktop codium.desktop Thunar.desktop xfce4-terminal.desktop
     
     browsing:
       name: personal-browsing
@@ -50,4 +58,4 @@ personal:
       memory: 4096
       maxmem: 6144
       vcpus: 2
-      menu_items: librewolf.desktop mullvad-browser.desktop org.gnome.Nautilus.desktop
+      menu_items: brave-browser.desktop mullvad-browser.desktop Thunar.desktop xfce4-terminal.desktop

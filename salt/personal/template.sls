@@ -131,3 +131,63 @@ age--cleanup:
       - cmd: age--install
 {% endif %}
 {% endif %}
+
+{% if 'packer' in packages %}
+{% set pk = packages.packer %}
+packer--ensure-unzip:
+  pkg.installed:
+    - name: unzip
+
+packer--download:
+  cmd.run:
+    - name: curl -L -o /tmp/packer.zip {{ pk.download_url }}
+    - env:
+      - https_proxy: {{ proxy }}
+    - creates: /usr/local/bin/packer
+    - unless: test -f /usr/local/bin/packer
+
+packer--extract:
+  cmd.run:
+    - name: unzip -o /tmp/packer.zip -d /tmp/
+    - unless: test -f /usr/local/bin/packer
+    - require:
+      - cmd: packer--download
+      - pkg: packer--ensure-unzip
+
+packer--install:
+  cmd.run:
+    - name: install -m 755 /tmp/packer /usr/local/bin/packer
+    - unless: test -f /usr/local/bin/packer
+    - require:
+      - cmd: packer--extract
+
+packer--cleanup:
+  file.absent:
+    - names:
+      - /tmp/packer.zip
+      - /tmp/packer
+    - require:
+      - cmd: packer--install
+{% endif %}
+
+{% if 'terraform' in packages %}
+{% set tf = packages.terraform %}
+terraform--ensure-dnf-plugins:
+  pkg.installed:
+    - name: dnf-plugins-core
+
+terraform--add-repo:
+  cmd.run:
+    - name: dnf config-manager addrepo --from-repofile={{ tf.repo_url }}
+    - env:
+      - https_proxy: {{ proxy }}
+    - creates: {{ tf.repo_file }}
+    - require:
+      - pkg: terraform--ensure-dnf-plugins
+
+terraform--install:
+  pkg.installed:
+    - name: {{ tf.package }}
+    - require:
+      - cmd: terraform--add-repo
+{% endif %}
